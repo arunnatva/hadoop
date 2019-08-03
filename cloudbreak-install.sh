@@ -60,5 +60,6 @@ cd /opt/cloudbreak-deployment
 
 Install postgresql on a remote machine
 $ yum install postgresql
-$psql "host=tdf-sb-postgres.postgres.database.azure.com port=5432 dbname=postgres user=pgadmin@tdf-sb-postgres password=hadoop@cloudera1 sslmode=require"
+$ psql "host=tdf-sb-postgres.postgres.database.azure.com port=5432 dbname=postgres user=pgadmin@tdf-sb-postgres password=hadoop@cloudera1 sslmode=require"
+
 

@@ -51,3 +51,14 @@ cd /opt/cloudbreak-deployment
 # $ cbd generate
 # $ cbd pull-parallel
 # $ cbd start
+
+##########
+
+# Start Posgres database on Azure PaaS or Install POSTGRES on an Azure VM
+# Ensure that client machine can connect to the Postgresql server. If on Azure, you can go to Connection Security, and add the client IP address
+# to allowed IPs to connect to Postgresql server
+
+Install postgresql on a remote machine
+$ yum install postgresql
+$psql "host=tdf-sb-postgres.postgres.database.azure.com port=5432 dbname=postgres user=pgadmin@tdf-sb-postgres password=hadoop@cloudera1 sslmode=require"
+

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+yum -y update
+
+yum -y install net-tools ntp wget lsof unzip tar iptables-services
+systemctl enable ntpd && systemctl start ntpd
+systemctl disable firewalld && systemctl stop firewalld
+
+iptables --flush INPUT && \
+iptables --flush FORWARD && \
+service iptables save
+
+setenforce 0
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+echo -n "Check the status of SELinux"
+getenforce
+
+yum install yum-utils
+yum-config-manager --enable rhui-REGION-rhel-server-extras
+yum install -y docker
+systemctl start docker
+systemctl enable docker
+
+docker info | grep "Logging Driver"
+
+vi /etc/sysconfig/docker
+
+# EDIT THE DOCKER CONFIG TO ADD json-file for log-driver
+# OPTIONS='--selinux-enabled --log-driver=json-file --signature-verification=false'
+
+systemctl restart docker
+systemctl status docker
+
+yum install -y jq
+
+yum -y install unzip tar
+curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_2.9.1_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+cbd --version
+
+mkdir /opt/cloudbreak-deployment
+pwd
+cd /opt/cloudbreak-deployment
+
+# go to the folder /opt/cloudbreak-deployment, and creaet a file called "Profile"
+# Contents of the Profile file are:
+#
+#
+#
+#
+# Run below commands in the folder where Profile was exists
+# $ cbd generate
+# $ cbd pull-parallel
+# $ cbd start

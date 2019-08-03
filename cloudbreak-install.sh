@@ -62,4 +62,24 @@ Install postgresql on a remote machine
 $ yum install postgresql
 $ psql "host=tdf-sb-postgres.postgres.database.azure.com port=5432 dbname=postgres user=pgadmin@tdf-sb-postgres password=hadoop@cloudera1 sslmode=require"
 
-
+postgres=> create database cbdb;
+CREATE DATABASE
+postgres=> create database periscopedb;
+CREATE DATABASE
+postgres=> create database uaadb;
+CREATE DATABASE
+postgres=> create user cbdadmin with encrypted password 'hadoop@cloudera1';
+CREATE ROLE
+postgres=> GRANT ALL PRIVILEGES ON DATABASE cbdb to cbdadmin;
+GRANT
+postgres=> GRANT ALL PRIVILEGES ON DATABASE periscopedb to cbdadmin;
+GRANT
+postgres=> GRANT ALL PRIVILEGES ON DATABASE uaadb to cbdadmin;
+GRANT
+postgres=> GRANT CONNECT ON DATABASE cbdb TO cbdadmin;
+GRANT
+postgres=> GRANT CONNECT ON DATABASE uaadb TO cbdadmin;
+GRANT
+postgres=> GRANT CONNECT ON DATABASE periscopedb TO cbdadmin;
+GRANT
+postgres=>
